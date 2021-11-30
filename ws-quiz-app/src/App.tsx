@@ -12,7 +12,7 @@ type AnswerObject = {
   correctAnswer: string,
 }
 
-const TOTAL_QUESTION = 10;
+const TOTAL_QUESTIONS = 10;
 
 const App = () => {
 const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ setLoading(true);
 setGameOver(false);
 
 const newQuestion = await fetchQuizQuestions(
-  TOTAL_QUESTION,
+  TOTAL_QUESTIONS,
   Difficulty.EASY
 );
 
@@ -38,32 +38,46 @@ setUserAnswers([]);
 setNumber(0);
 setLoading(false);
 
-}
+};
 
 const checkAnswer = (e: React.MouseEvent<HTMLElement>) => {
   
-}
+};
+
+
+
 
 const nextQuestion = () => {
 
-}
+};
+
 
   return (
     <div className="App">
       <h1>Quiz</h1>
-      {gameOver || userAnswers.length === TOTAL_QUESTION ? //The button will appear only if the game is over or if the user answered all the questions
+
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ?
       (<button className="start" onClick={startQuiz}>Starting the quiz</button>) : null}
-      <p className="score">Score: </p>
-      <p>Loading questions...</p>
-      {/* <QuestionCard 
+      {/* The button will appear only if the game is over or if the user answered all the questions */}
+
+      {!gameOver ? <p className="score">Score: </p> : null}
+      {/* The score will be displayed only if the game is not over */}
+      {loading && <p>Loading questions...</p>}
+      {/* The loading will be dispalyed only if the questions are loading */}
+
+      {!loading && !gameOver && (<QuestionCard 
       QuestionNb={number + 1}
-      totalQuestions={TOTAL_QUESTION}
+      totalQuestions={TOTAL_QUESTIONS}
       question={questions[number].question}
       answers={questions[number].answers}
       userAnswer={userAnswers ? userAnswers[number] : undefined}
       callback={checkAnswer}
-      /> */}
-      <button className="next" onClick={nextQuestion}>Next question</button>
+      />)}
+      {/* The questions will be displayed only if it's not loading and if the game is not over */}
+
+      {!loading && !gameOver && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS ?
+      (<button className="next" onClick={nextQuestion}>Next question</button>) : null}
+      {/* The button will appear only if the game is not over, the questions are not loading, the user answers the question and if this isn't the last question */}
     </div>
   );
 }
