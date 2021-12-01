@@ -1,8 +1,9 @@
 import React from "react";
+import DOMPurify from "dompurify";
 
 type Card = {
     question: string,
-    answers: string[],
+    answer: string[],
     callback: any,
     userAnswer: any,
     QuestionNb: number,
@@ -10,20 +11,29 @@ type Card = {
 }
 
 
-const QuestionCard: React.FC<Card> = ({question, answers, callback, userAnswer, QuestionNb, totalQuestions}) => (
+const QuestionCard: React.FC<Card> = ({
+    question, 
+    answer =[],
+    callback,
+    userAnswer,
+    QuestionNb,
+    totalQuestions
+}) => (
 (<div>
-    <p className="number">Question: {QuestionNb} / {totalQuestions}</p>
-    <p dangerouslySetInnerHTML={{__html: question}}></p>
+    <p className="number">
+    Question: {QuestionNb} / {totalQuestions}
+    </p>
+    <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(question)}}></p>
     <div>
-        {answers.map (answer => (
+        {answer.map ((answer) => (
             <div key= {answer}>
-                <button disabled={userAnswer} onClick={callback}>
-                    <span dangerouslySetInnerHTML={{__html: answer}} />
+                <button disabled={userAnswer} value={answer} onClick={callback}>
+                    <span dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(answer)}} />
                 </button>
             </div>
         ))}
     </div>
 </div>)
-)
+);
 
 export default QuestionCard;

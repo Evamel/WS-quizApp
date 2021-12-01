@@ -7,9 +7,10 @@ import QuestionCard from './components/QuestionCard';
 
 type AnswerObject = {
   question: string,
-  answers: string[],
+  answer: string[],
   correct: boolean,
   correctAnswer: string,
+
 }
 
 const TOTAL_QUESTIONS = 10;
@@ -40,8 +41,31 @@ setLoading(false);
 
 };
 
-const checkAnswer = (e: React.MouseEvent<HTMLElement>) => {
-  
+
+const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+  if(!gameOver){
+    // Getting the user answer
+    // const answer = e.currentTarget.value;
+    const answer = (e.currentTarget as any).value;
+    
+    // Compare this answer to the correct answer
+    const correct = questions[number].correct_answer === answer;
+
+    // Add one to the score if the answer is correct
+    if(correct) {
+      setScore(prev => prev + 1);
+    }
+
+    const answerObject = {
+      question: questions[number].question, 
+      answer, 
+      correct, 
+      correctAnswer: questions[number].correct_answer
+    };
+
+    setUserAnswers(prev => [...prev, answerObject]);
+
+  }
 };
 
 
@@ -69,7 +93,7 @@ const nextQuestion = () => {
       QuestionNb={number + 1}
       totalQuestions={TOTAL_QUESTIONS}
       question={questions[number].question}
-      answers={questions[number].answers}
+      answer={questions[number].answers}
       userAnswer={userAnswers ? userAnswers[number] : undefined}
       callback={checkAnswer}
       />)}
