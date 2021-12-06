@@ -5,9 +5,9 @@ import { QuestionState, Difficulty } from './API';
 
 import QuestionCard from './components/QuestionCard';
 
-type AnswerObject = {
+export type AnswerObject = {
   question: string,
-  answer: string[],
+  answer: string,
   correct: boolean,
   correctAnswer: string,
 
@@ -69,10 +69,14 @@ const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
 };
 
 
-
-
 const nextQuestion = () => {
+  const nextQuestion = number + 1;
 
+  if(nextQuestion === TOTAL_QUESTIONS){
+    setGameOver(true);
+  }else{
+    setNumber(nextQuestion);
+  }
 };
 
 
@@ -84,7 +88,7 @@ const nextQuestion = () => {
       (<button className="start" onClick={startQuiz}>Starting the quiz</button>) : null}
       {/* The button will appear only if the game is over or if the user answered all the questions */}
 
-      {!gameOver ? <p className="score">Score: </p> : null}
+      {!gameOver ? <p className="score">Score: {score}</p> : null}
       {/* The score will be displayed only if the game is not over */}
       {loading && <p>Loading questions...</p>}
       {/* The loading will be dispalyed only if the questions are loading */}

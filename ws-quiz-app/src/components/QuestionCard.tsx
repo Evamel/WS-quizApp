@@ -1,11 +1,12 @@
 import React from "react";
 import DOMPurify from "dompurify";
+import {AnswerObject} from "../App";
 
 type Card = {
     question: string,
     answer: string[],
-    callback: any,
-    userAnswer: any,
+    callback: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    userAnswer: AnswerObject | undefined,
     QuestionNb: number,
     totalQuestions: number
 }
@@ -27,7 +28,7 @@ const QuestionCard: React.FC<Card> = ({
     <div>
         {answer.map ((answer) => (
             <div key= {answer}>
-                <button disabled={userAnswer} value={answer} onClick={callback}>
+                <button disabled={!!userAnswer} value={answer} onClick={callback}>
                     <span dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(answer)}} />
                 </button>
             </div>
