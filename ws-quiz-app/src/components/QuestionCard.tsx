@@ -2,6 +2,8 @@ import React from "react";
 import DOMPurify from "dompurify";
 import {AnswerObject} from "../App";
 
+import {ButtonWrapper} from "../components/QuestionCard.styles";
+
 type Card = {
     question: string,
     answer: string[],
@@ -27,11 +29,15 @@ const QuestionCard: React.FC<Card> = ({
     <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(question)}}></p>
     <div>
         {answer.map ((answer) => (
-            <div key= {answer}>
+            <ButtonWrapper 
+            key= {answer}
+            correct={userAnswer?.correctAnswer === answer}
+            userClicked={userAnswer?.answer === answer}
+            >
                 <button disabled={!!userAnswer} value={answer} onClick={callback}>
                     <span dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(answer)}} />
                 </button>
-            </div>
+            </ButtonWrapper>
         ))}
     </div>
 </div>)

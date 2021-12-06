@@ -5,6 +5,8 @@ import { QuestionState, Difficulty } from './API';
 
 import QuestionCard from './components/QuestionCard';
 
+import { GlobalStyle, Wrapper } from './App.styles';
+
 export type AnswerObject = {
   question: string,
   answer: string,
@@ -81,7 +83,10 @@ const nextQuestion = () => {
 
 
   return (
-    <div className="App">
+    <>
+    <GlobalStyle />
+    
+    <Wrapper>
       <h1>Quiz</h1>
 
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ?
@@ -106,7 +111,8 @@ const nextQuestion = () => {
       {!loading && !gameOver && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS ?
       (<button className="next" onClick={nextQuestion}>Next question</button>) : null}
       {/* The button will appear only if the game is not over, the questions are not loading, the user answers the question and if this isn't the last question */}
-    </div>
+    </Wrapper>
+    </>
   );
 }
 
