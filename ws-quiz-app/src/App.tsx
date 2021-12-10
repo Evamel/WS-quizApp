@@ -98,7 +98,7 @@ const nextQuestion = () => {
       QuestionNb={number + 1}
       totalQuestions={TOTAL_QUESTIONS}
       question={questions[number].question}
-      answer={questions[number].answers}
+      answers={questions[number].answers}
       userAnswer={userAnswers ? userAnswers[number] : undefined}
       callback={checkAnswer}
       />)}

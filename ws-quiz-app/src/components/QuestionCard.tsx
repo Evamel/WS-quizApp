@@ -6,7 +6,7 @@ import {ButtonWrapper} from "../components/QuestionCard.styles";
 
 type Card = {
     question: string,
-    answer: string[],
+    answers: string[],
     callback: (e: React.MouseEvent<HTMLButtonElement>) => void,
     userAnswer: AnswerObject | undefined,
     QuestionNb: number,
@@ -15,7 +15,7 @@ type Card = {
 
 const QuestionCard: React.FC<Card> = ({
     question, 
-    answer =[],
+    answers =[],
     callback,
     userAnswer,
     QuestionNb,
@@ -27,7 +27,7 @@ const QuestionCard: React.FC<Card> = ({
     </p>
     <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(question)}}></p>
     <div>
-        {answer.map ((answer) => (
+        {answers.map ((answer) => (
             <ButtonWrapper 
             key= {answer}
             correct={userAnswer?.correctAnswer === answer}
