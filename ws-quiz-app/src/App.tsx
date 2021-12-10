@@ -12,7 +12,6 @@ export type AnswerObject = {
   answer: string,
   correct: boolean,
   correctAnswer: string,
-
 }
 
 const TOTAL_QUESTIONS = 10;
@@ -40,7 +39,6 @@ setScore(0);
 setUserAnswers([]);
 setNumber(0);
 setLoading(false);
-
 };
 
 
@@ -66,7 +64,6 @@ const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     };
 
     setUserAnswers(prev => [...prev, answerObject]);
-
   }
 };
 
@@ -80,7 +77,6 @@ const nextQuestion = () => {
     setNumber(nextQuestion);
   }
 };
-
 
   return (
     <>

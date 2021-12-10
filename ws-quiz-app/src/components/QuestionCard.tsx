@@ -13,7 +13,6 @@ type Card = {
     totalQuestions: number
 }
 
-
 const QuestionCard: React.FC<Card> = ({
     question, 
     answer =[],
