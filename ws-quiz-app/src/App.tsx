@@ -104,7 +104,7 @@ const nextQuestion = () => {
       />)}
       {/* The questions will be displayed only if it's not loading and if the game is not over */}
 
-      {!loading && !gameOver && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS ?
+      {!loading && !gameOver && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ?
       (<button className="next" onClick={nextQuestion}>Next question</button>) : null}
       {/* The button will appear only if the game is not over, the questions are not loading, the user answers the question and if this isn't the last question */}
     </Wrapper>
